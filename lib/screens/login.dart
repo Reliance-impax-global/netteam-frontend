@@ -56,11 +56,6 @@ class _LoginState extends State<Login> {
         // print(myData.id);
 
         final data = json.decode(response.body);
-        ElegantNotification.success(
-                toastDuration: Duration(milliseconds: 2000),
-                title: Text("Update"),
-                description: Text(data['msg']))
-            .show(context);
 
         /// creating a instance of shared preference to store token
         SharedPreferences prefs = await SharedPreferences.getInstance();

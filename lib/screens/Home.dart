@@ -120,8 +120,7 @@ class _HomeState extends State<Home> {
 
   /// part of video editor sdk
   static const String LICENSE_TOKEN =
-      "Qk5CILx021FztBkHJbKfJy08lQgsTWwa/AZKEd//4+N2VtgatlBHJCW+tg4XGjh9DaLt2Uv8llIQtd/KABU6bNrEJbQNL0CynNilmfgS+c39BBi0b+31C42OU/7yk2TVFTiRTpGJKGLM94n5GTeBHCqCFW6v8nNvVCQnPDhhcRXNwJMZMh+h7eDKKgEFblBYOJd0+/L7ZzM6Ypz9XZEwiAKIWRppQGNRAHHXhvB1H/cEcBI8DxwsLzmFeM2CszEBQD4PRLastoZL2xu7jDdIdquwLPe91AQrTGScrdqIPzmPhT6DlLwJWGKwoBemoDCoDVsgPUbJs9EwW1bMeTV4t59YZ3Ofuq96rLAiKRSsuVftlADVp++80SYxiw1CJccQXvu2LORtoHbKZC6mYCjKt6vTxUWMTtpQBLLUJgqgy4B6r5TbzbPVdwiwvgLlHCW31tWyFrzu7MDIth4EUtghvqW2wtAVt/3mPeFNecwKdTbj+bC8Qn1WIrSPFs+/Xz6NO5Ptj+ROEY3ronMSbGHYurVkDYPmK39MRGjcdcaMDPPnr3UAhR+NVwgMtghko0V6eMW7ZGpDIOxocp01WZPG863QohiCyXYbYwLheq7g8omSP+G3+YTfre9RrgDv5uh2VZz6RmiOzD8qkHaK3fBUcw==";
-
+      "Qk5CIKkm5ytxl2IprgpZeDVlf4sW6ZxFOPzhkKcC5vhe0aTOvwZtrBZckyubfOsQsd22kUWLCLHPDU16KcDp1H29ylxWdrWbKY/YOhCGqWvyFO9/F0g58XWpEfqTs2DMaQszms6KkBrRPNE5nW3TLdCNG+1ZUvZGNs3fjg28S+SR0lKPfnAUa1jbDZ8I5Qpa4UfNxDLxbmxrPCWiqwLRRP8Ujc0hzjBDfCTqXA/21kwLdtysYVYmx552hFwB5ME5IG5lcWPeSlZBknBISeg0r4QYQ4r2NtRsy8nQngzDrbLcW+TNwNDpUoGBD6uh7eiNTMzZwStxHd3VDv9bY3vCxQg6bIQ66ozq8yunKL0AUNVMEFuCXSavJUmsEEf1hez/yCc2d/8Zug7BmaATlNcnSHpypskNORFbb9lFbn+rNyckMN0vZxMpfm5oBoawPCdqsHyIlVLnvloSM+EadYCOun01fQI1ucecCbCvzsnUiY68G1gPrRHaXigQ+cpfsOWDEfFGBN+ZPH/B6GTA8CzjPE4TgDgnJrVaOnT+D1XHYcbGpzPqAUO45+TSxd3t4Lckw5nDgCfwh8JY4O7MA2lpnPpI+LDq2T0Ft782kdX4F2CnPe+ya4VGHiZzaLcNGoMVzNp/FupJM7JaJJ1OMvUpmg==";
   // static String? LICENSE_TOKEN = dotenv.env['BANUBA_LICENSE_TOKEN'];
 
   static const channelName = 'startActivity/VideoEditorChannel';
@@ -274,16 +273,17 @@ class _HomeState extends State<Home> {
                   itemBuilder: (BuildContext context, int index) {
                     final reel = reels[index];
                     // reelId = reel["_id"];
-                    return ContentScreen(reel: reel
-                        // likedStatus: reel["likedStatus"],
-                        // likeCount: reel["likesCount"],
-                        // reelId: reel['_id'],
-                        // src: reel['videoUrl'],
-                        // author: reel['author'],
-                        // description: reel['description'],
-                        // likes: reel['likes'],
-                        // comments: reel['comments']
-                        );
+                    return ContentScreen(
+                      reel: reel, email: id,
+                      // likedStatus: reel["likedStatus"],
+                      // likeCount: reel["likesCount"],
+                      // reelId: reel['_id'],
+                      // src: reel['videoUrl'],
+                      // author: reel['author'],
+                      // description: reel['description'],
+                      // likes: reel['likes'],
+                      // comments: reel['comments']
+                    );
                   },
                   itemCount: reels.length,
                   scrollDirection: Axis.vertical,
@@ -392,9 +392,11 @@ class ContentScreen extends StatefulWidget {
   // final bool? likedStatus;
   // final int? likeCount;
   final dynamic reel;
+  final String email;
   const ContentScreen({
     Key? key,
     required this.reel,
+    required this.email,
     // this.src,
     // this.author,
     // this.description,
@@ -470,6 +472,7 @@ class _ContentScreenState extends State<ContentScreen> {
           ),
         OptionsScreen(
           reel: widget.reel ?? "",
+          email: widget.email,
           // author: widget.reel['author'],
           // description: widget.reel['description'],
           // likes: widget.reel['likes'],
@@ -507,9 +510,11 @@ class OptionsScreen extends StatefulWidget {
   // final List? likes;
   // final List? comments;
   final dynamic reel;
+  final String email;
   const OptionsScreen({
     Key? key,
     this.reel,
+    required this.email,
     // this.author,
     // this.description,
     // this.likes,
@@ -523,22 +528,22 @@ class _OptionsScreenState extends State<OptionsScreen> {
   bool isLiked = false;
   bool _isFollowing = false;
   bool savedStatus = false;
-  late String id;
+  String? id;
 
   Future<void> likeButtonPressed(bool isLiked) async {
     String apiUrl = "${dotenv.env['BACKEND_URL']}/like";
     try {
       print("like button pressed");
       print("videoId : ${widget.reel['_id']}");
-      print("userId : ${id}");
-      print("likedstatus : ${isLiked}");
-      print(widget.reel["likesCount"]);
+      print("userId : ${widget.email}");
+      print("Liked Status : $isLiked");
+
       final response = await http.post(Uri.parse(apiUrl),
           headers: {'Content-Type': 'application/json'},
           body: json.encode(<String, dynamic>{
             "videoId": widget.reel['_id'],
-            "userId": id,
-            "likedStatus": !isLiked,
+            "email": widget.email,
+            "likedStatus": isLiked,
           }));
 
       if (response.statusCode == 200) {
@@ -559,7 +564,8 @@ class _OptionsScreenState extends State<OptionsScreen> {
   @override
   void initState() {
     super.initState();
-    id = Provider.of<MyDataContainer>(context, listen: false).id;
+    id = Provider.of<MyDataContainer>(context, listen: false).userEmail;
+    print("reel data ${widget.reel}");
   }
 
   @override
@@ -570,7 +576,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 50,
+            height: 60,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -605,8 +611,9 @@ class _OptionsScreenState extends State<OptionsScreen> {
                       ],
                     ),
                     SizedBox(height: 10),
+
                     Text(" ${widget.reel['description']}"),
-                    SizedBox(height: 10),
+                    // SizedBox(height: 10),
                     // Row(
                     //   children: [
                     //     Icon(
@@ -636,6 +643,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
                                   }
                                 })
                               });
+                      print(widget.reel["likesCount"]);
                     },
                     icon: Icon(
                       widget.reel["likedStatus"]
@@ -649,7 +657,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
                   ),
                   // Text(widget.reel['likes'].length.toString()),
                   Text(widget.reel["likesCount"].toString()),
-                  SizedBox(height: 15),
+                  SizedBox(height: 10),
                   IconButton(
                     onPressed: () {
                       showModalBottomSheet(
@@ -666,7 +674,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
                     ),
                   ),
                   Text(widget.reel['comments'].length.toString()),
-                  SizedBox(height: 15),
+                  SizedBox(height: 10),
                   SizedBox(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -694,7 +702,7 @@ class _OptionsScreenState extends State<OptionsScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 5),
                   // Icon(Icons.more_vert, color: Colors.white),
                 ],
               )

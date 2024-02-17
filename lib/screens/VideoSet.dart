@@ -62,8 +62,7 @@ class _VideoSetState extends State<VideoSet> {
 
   /// part of video editor sdk
   static const String LICENSE_TOKEN =
-      "Qk5CILx021FztBkHJbKfJy08lQgsTWwa/AZKEd//4+N2VtgatlBHJCW+tg4XGjh9DaLt2Uv8llIQtd/KABU6bNrEJbQNL0CynNilmfgS+c39BBi0b+31C42OU/7yk2TVFTiRTpGJKGLM94n5GTeBHCqCFW6v8nNvVCQnPDhhcRXNwJMZMh+h7eDKKgEFblBYOJd0+/L7ZzM6Ypz9XZEwiAKIWRppQGNRAHHXhvB1H/cEcBI8DxwsLzmFeM2CszEBQD4PRLastoZL2xu7jDdIdquwLPe91AQrTGScrdqIPzmPhT6DlLwJWGKwoBemoDCoDVsgPUbJs9EwW1bMeTV4t59YZ3Ofuq96rLAiKRSsuVftlADVp++80SYxiw1CJccQXvu2LORtoHbKZC6mYCjKt6vTxUWMTtpQBLLUJgqgy4B6r5TbzbPVdwiwvgLlHCW31tWyFrzu7MDIth4EUtghvqW2wtAVt/3mPeFNecwKdTbj+bC8Qn1WIrSPFs+/Xz6NO5Ptj+ROEY3ronMSbGHYurVkDYPmK39MRGjcdcaMDPPnr3UAhR+NVwgMtghko0V6eMW7ZGpDIOxocp01WZPG863QohiCyXYbYwLheq7g8omSP+G3+YTfre9RrgDv5uh2VZz6RmiOzD8qkHaK3fBUcw==";
-
+      "Qk5CIKkm5ytxl2IprgpZeDVlf4sW6ZxFOPzhkKcC5vhe0aTOvwZtrBZckyubfOsQsd22kUWLCLHPDU16KcDp1H29ylxWdrWbKY/YOhCGqWvyFO9/F0g58XWpEfqTs2DMaQszms6KkBrRPNE5nW3TLdCNG+1ZUvZGNs3fjg28S+SR0lKPfnAUa1jbDZ8I5Qpa4UfNxDLxbmxrPCWiqwLRRP8Ujc0hzjBDfCTqXA/21kwLdtysYVYmx552hFwB5ME5IG5lcWPeSlZBknBISeg0r4QYQ4r2NtRsy8nQngzDrbLcW+TNwNDpUoGBD6uh7eiNTMzZwStxHd3VDv9bY3vCxQg6bIQ66ozq8yunKL0AUNVMEFuCXSavJUmsEEf1hez/yCc2d/8Zug7BmaATlNcnSHpypskNORFbb9lFbn+rNyckMN0vZxMpfm5oBoawPCdqsHyIlVLnvloSM+EadYCOun01fQI1ucecCbCvzsnUiY68G1gPrRHaXigQ+cpfsOWDEfFGBN+ZPH/B6GTA8CzjPE4TgDgnJrVaOnT+D1XHYcbGpzPqAUO45+TSxd3t4Lckw5nDgCfwh8JY4O7MA2lpnPpI+LDq2T0Ft782kdX4F2CnPe+ya4VGHiZzaLcNGoMVzNp/FupJM7JaJJ1OMvUpmg==";
   // static String? LICENSE_TOKEN = dotenv.env['BANUBA_LICENSE_TOKEN'];
 
   static const channelName = 'startActivity/VideoEditorChannel';
@@ -209,7 +208,7 @@ class _VideoSetState extends State<VideoSet> {
         title: Text(
           "Video Chat",
           style: GoogleFonts.nunito(
-              fontSize: 36.sp,
+              fontSize: 32.sp,
               fontWeight: FontWeight.w800,
               color: Colors.white),
         ),
@@ -259,7 +258,10 @@ class _VideoSetState extends State<VideoSet> {
                       _removeInterest(interest);
                     },
                     child: Chip(
-                      label: Text(interest),
+                      label: Text(
+                        interest,
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   );
                 }).toList(),
@@ -306,7 +308,7 @@ class _VideoSetState extends State<VideoSet> {
                   children: [
                     Expanded(
                       child: Text(
-                        "Based on 3 interest details that you added above",
+                        "Based on 3 interest details that you added above.",
                         style: GoogleFonts.roboto(
                             fontSize: 13.sp,
                             color: Colors.white,
@@ -328,7 +330,7 @@ class _VideoSetState extends State<VideoSet> {
                           style: GoogleFonts.roboto(
                               fontWeight: FontWeight.w700,
                               color: Colors.white,
-                              fontSize: 15.sp),
+                              fontSize: 12.sp),
                         ),
                         onPressed: () {
                           if (interests.length > 0) {
@@ -369,7 +371,7 @@ class _VideoSetState extends State<VideoSet> {
                 children: [
                   SizedBox(
                     height: 35.h,
-                    width: 125.w,
+                    width: 135.w,
                     child: ElevatedButton(
                       style: ButtonStyle(
                           backgroundColor:
@@ -379,7 +381,7 @@ class _VideoSetState extends State<VideoSet> {
                         style: GoogleFonts.roboto(
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
-                            fontSize: 15.sp),
+                            fontSize: 12.sp),
                       ),
                       onPressed: () {
                         setState(() {
@@ -402,7 +404,7 @@ class _VideoSetState extends State<VideoSet> {
                   ),
                   Expanded(
                     child: Text(
-                      "Based on interest details that you added in your profile",
+                      "Based on interest details that you added in your profile.",
                       style: GoogleFonts.roboto(
                           fontSize: 13.sp,
                           color: Colors.white,
