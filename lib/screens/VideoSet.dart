@@ -438,61 +438,45 @@ class _VideoSetState extends State<VideoSet> {
                     ),
                     Container(
                       padding: EdgeInsets.only(left: 15.w),
-                      child: Column(children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "1.",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 13.sp,
-                                  color: Colors.orange,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "Do not use bad language and be professional",
-                                style: GoogleFonts.roboto(
-                                    fontSize: 13.sp,
-                                    color: Colors.orange,
-                                    fontWeight: FontWeight.w500),
+                      child: Column(
+                        children: [
+                          for (var i = 0;
+                              i < 2;
+                              i++) // This loop replaces the repeated Row widgets
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: i < 1
+                                      ? 10.h
+                                      : 0), // Adds space between the warnings, but not after the last one
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "${i + 1}.",
+                                    style: GoogleFonts.roboto(
+                                        fontSize: 13.sp,
+                                        color: Colors.orange,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(width: 10.w),
+                                  Expanded(
+                                    child: Text(
+                                      i == 0
+                                          ? "Do not use bad language and be professional"
+                                          : "Legal actions could be taken if the users are reported",
+                                      style: GoogleFonts.roboto(
+                                          fontSize: 13.sp,
+                                          color: Colors.orange,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "2.",
-                              style: GoogleFonts.roboto(
-                                  fontSize: 13.sp,
-                                  color: Colors.orange,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            SizedBox(
-                              width: 10.w,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "Legal actions could be taken if the users are reported",
-                                style: GoogleFonts.roboto(
-                                    fontSize: 13.sp,
-                                    color: Colors.orange,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        )
-                      ]),
+                        ],
+                      ),
                     )
                   ],
                 ),
