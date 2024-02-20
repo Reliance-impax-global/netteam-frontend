@@ -64,15 +64,15 @@ class AudioBrowserActivity : FlutterActivity() {
                 METHOD_APPLY_AUDIO_TRACK -> {
                     val rawJson = call.arguments as String
 
-                    /*
-                    rawJson format
-                    {
-	                    "url": "file:///storage/emulated/0/Android/data/com.banuba.flutter.flutter_ve_sdk/files/sample_audio.mp3",
-	                    "id": "b238d460-6455-11ed-99ea-0741c437b7af",
-	                    "artist": "The best artist",
-	                    "title": "My favorite song"
-                    }
-                    */
+
+//                    rawJson format
+//                    {
+//	                    "url": "file:///storage/emulated/0/Android/data/com.banuba.flutter.flutter_ve_sdk/files/sample_audio.mp3",
+//	                    "id": "b238d460-6455-11ed-99ea-0741c437b7af",
+//	                    "artist": "The best artist",
+//	                    "title": "My favorite song"
+//                    }
+
                     val trackJson = JSONObject(rawJson)
                     val trackData = TrackData(
                         localUri = Uri.parse(trackJson.getString("url")),

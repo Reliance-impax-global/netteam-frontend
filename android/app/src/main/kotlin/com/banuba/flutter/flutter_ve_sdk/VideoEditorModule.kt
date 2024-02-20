@@ -10,6 +10,7 @@ import com.banuba.sdk.arcloud.data.source.ArEffectsRepositoryProvider
 import com.banuba.sdk.arcloud.di.ArCloudKoinModule
 import com.banuba.sdk.audiobrowser.di.AudioBrowserKoinModule
 import com.banuba.sdk.audiobrowser.domain.AudioBrowserMusicProvider
+import com.banuba.sdk.audiobrowser.data.MubertApiConfig
 import com.banuba.sdk.cameraui.data.CameraTimerActionProvider
 import com.banuba.sdk.cameraui.data.CameraTimerStateProvider
 import com.banuba.sdk.cameraui.data.TimerEntry
@@ -47,6 +48,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+
 
 class VideoEditorModule {
 
@@ -108,6 +110,13 @@ private class SampleIntegrationVeKoinModule {
             )
         }
 
+        single {
+            MubertApiConfig(
+                mubertLicence = "pawarrajkumar0707mubertlicense#jQ5SN1AQ6doX9R3qLGb38LFVwZzaNz8xlFZuKlhvq7XGeDLop2OMjozr42tCRmCMWgrO",
+                mubertToken = "72f645fd73bb879bab6da0b6dd846363ee54476b"
+            )
+        }
+
 
         // Audio Browser provider implementation.
         single<ContentFeatureProvider<TrackData, Fragment>>(
@@ -126,6 +135,15 @@ private class SampleIntegrationVeKoinModule {
                 override fun provide(): AspectRatio = AspectRatio(9.0 / 16)
             }
         }
+
+
+
+
+//        single {
+//            MubertApiConfig("cGF3YXJyYWprdW1hcjA3MDcuMjE2MjA5MDguNzJmNjQ1ZmQ3M2JiODc5YmFiNmRhMGI2ZGQ4NDYzNjNlZTU0NDc2Yi4xLjM.16863abe4deba0e9d0bb61780f5459a8ae6ad26eef8bd8bea6b95dd99a8a6b1e")
+//        }
+
+
     }
 }
 
